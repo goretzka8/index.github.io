@@ -19,6 +19,12 @@
     <header>
         <h1>无人机检测平台</h1>
         <div class="showtime"></div>
+        <div class="gaodemap">
+            <a href="map.html">地图显示</a>
+            <style>
+            </style>
+        </div>
+
         <!-- 时间记录 -->
         <script>
             var t = null;
@@ -39,13 +45,13 @@
     </header>
     <!-- 页面主体部分 -->
     <section class="mainbox">
-        <div class="column">gebinahao
+        <div class="column">
             <div class="panel line">
                 <h2>折线图-各设备经度</h2>
                 <div class="chart"></div>
                 <div class="panel-footer"></div>
             </div>
-            <div class="panel line">
+            <div class="panel line2">
                 <h2>折线图-各设备纬度</h2>
                 <div class="chart"></div>
                 <div class="panel-footer"></div>
@@ -100,8 +106,13 @@
         </div>
     </section>
     <script src="js/flexible.js" /script></script>
+    <script src="js/echarts.min.js" /script></script>//初始化实例对象
+    <script src="js/jquery.js" /script></script>
     <script src="js/china.js" /script></script>
-    <script src="js/index.js" /script></script>
+    <script src="js/wuhan.js" /script></script>
+    <script src="js/my.js" /script></script>
+    <script src="js/Map.js" /script></script>
+
 </body>
 
 </html>

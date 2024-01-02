@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+/* 声明字体*/
+@font-face {
+    font-family: electronicFont;
+    src: url(../font/DS-DIGIT.TTF);
+}
+
+// body {
+//     background: url(../images/map_bg.png) no-repeat top center;
+//     line-height: 1.15;
+// }
+
+header {
+    position: relative;
+    height: 3.5rem;
+    background: url(../images/bg_top.png) no-repeat;
+    background-size: 100% 100%;
+
+    h1 {
+        font-size: 1.5rem;
+        color: #3b1dd3;
+        text-align: center; //文本居中对齐
+        line-height: 2rem;
+    }
+
+    .showtime {
+        position: absolute;
+        right: 1.2rem;
+        top: 0.75rem;
+        line-height: 0.9375rem;
+        color: #3b1dd3;
+        font-size: 0.9375rem;
+        font-weight: 600;
+    }
+
+    .gaodemap {
+        position: absolute;
+        right: 25rem;
+        top: 0.75rem;
+        line-height: 1rem;
+        color: #3b1dd3;
+        font-size: 1rem;
+        font-weight: 800;
+        font-family: "electronicFont";
+
+        a {
+            text-decoration: underline
+        }
+
+        a:hover {
+            text-decoration: none
+        }
+    }
+}
+
+// .mainbox {
+//     display: flex;
+//     min-width: 1024px;
+//     max-width: 1920px;
+//     margin: 0 auto;
+//     padding: 0.125rem 0.125rem 0; //内边距10px
+
+// .container {
+//     width: 300px;
+//     height: 180px;
+// }
+
+// }

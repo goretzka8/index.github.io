@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="css/map.css" />
+    <title>地图显示</title> -->
+    <style>
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0.125rem 0.125rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>无人机检测平台</h1>
+        <div class="showtime"></div>
+        <div class="gaodemap">
+            <a href="index.html">数据统计</a>
+        </div>
+        <!-- 时间记录 -->
+        <script>
+            var t = null;
+            t = setTimeout(time, 1000);//開始运行
+            function time() {
+                clearTimeout(t);//清除定时器
+                dt = new Date();
+                var y = dt.getFullYear();
+                var mt = dt.getMonth() + 1;
+                var day = dt.getDate();
+                var h = dt.getHours();//获取时
+                var m = dt.getMinutes();//获取分
+                var s = dt.getSeconds();//获取秒
+                document.querySelector(".showtime").innerHTML = '当前时间：' + y + "年" + mt + "月" + day + "日-" + h + "时" + m + "分" + s + "秒";
+                t = setTimeout(time, 1000); //设定定时器，循环运行     
+            }
+        </script>
+    </header>
+    <div id="container"></div>
+    <div id="tip" class="info">地图上右击鼠标，弹出自定义样式的右键菜单</div>
+    <!-- 加载地图JSAPI脚本 -->
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=91b56baae0463cb07b7b46961d0a7ebe"></script>
+    <script>
+        var map = new AMap.Map('container', {
+            resizeEnable: true, //是否监控地图容器尺寸变化
+            zoom: 11, //初始化地图层级
+            // center: [116.397428, 39.90923] //初始化地图中心点
+        });
+        var trafficLayer = new AMap.TileLayer.Traffic({
+            zIndex: 10
+        });
+        map.add(trafficLayer);//添加图层到地图
+
+        // 同时引入工具条插件，比例尺插件和鹰眼插件
+        AMap.plugin([
+            'AMap.ToolBar',
+            'AMap.Scale',
+            'AMap.OverView',
+            'AMap.MapType',
+            'AMap.Geolocation',
+        ], function () {
+            // 在图面添加工具条控件，工具条控件集成了缩放、平移、定位等功能按钮在内的组合控件
+            map.addControl(new AMap.ToolBar());
+
+            // 在图面添加比例尺控件，展示地图在当前层级和纬度下的比例尺
+            map.addControl(new AMap.Scale());
+
+            // 在图面添加鹰眼控件，在地图右下角显示地图的缩略图
+            map.addControl(new AMap.OverView({ isOpen: true }));
+
+            // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
+            map.addControl(new AMap.MapType());
+
+            // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
+            map.addControl(new AMap.Geolocation());
+        });
+
+        // //创建右键菜单
+        // var contextMenu = new AMap.ContextMenu();
+
+        // //右键放大
+        // contextMenu.addItem("放大一级", function () {
+        //     map.zoomIn();
+        // }, 0);
+
+        // //右键缩小
+        // contextMenu.addItem("缩小一级", function () {
+        //     map.zoomOut();
+        // }, 1);
+
+        // //右键显示全国范围
+        // contextMenu.addItem("缩放至全国范围", function (e) {
+        //     map.setZoomAndCenter(4, [108.946609, 34.262324]);
+        // }, 2);
+
+        // //右键添加Marker标记
+        // contextMenu.addItem("添加标记", function (e) {
+        //     var marker = new AMap.Marker({
+        //         map: map,
+        //         position: contextMenuPositon //基点位置
+        //     });
+        // }, 3);
+
+        // //地图绑定鼠标右击事件——弹出右键菜单
+        // map.on('rightclick', function (e) {
+        //     contextMenu.open(map, e.lnglat);
+        //     contextMenuPositon = e.lnglat;
+        // });
+
+        // contextMenu.open(map, lnglat);
+
+
+        // var contextMenu = new AMap.ContextMenu({
+        //     isCustom: true,
+        //     content: content.join('')
+        // });
+
+        // map.on('rightclick', function (e) {
+        //     contextMenu.open(map, e.lnglat);
+        // });
+
+
+        //添加marker标记
+        let marker1 = new AMap.Marker({
+            position: [116.397428, 39.90923], //位置
+            offset: new AMap.Pixel(-13, -30),//偏移
+        });
+
+        //监听标点点击事件（显示窗体信息）
+        marker1.on('click', e => {
+            //创建窗体实例
+            let infoWindow = new AMap.InfoWindow({
+                content: '经度:116<br/>纬度:39<br/>高度:50',//窗体内容,支持插入dom.innerHTML 
+                anchor: 'top-right'//锚点，窗体相对鼠标点击位置
+            });
+            //显示窗体
+            //map:地图实例，[lng,lat]:窗体在地图中位置
+            infoWindow.open(map, [e.lnglat.lng, e.lnglat.lat])
+        })
+
+        //标点添加到地图上
+        map.add(marker1)
+        infoWindow.close();//关闭信息窗口
+
+
+        var path = [[116, 39], [116, 40], [117, 39]]; //简写
+
+        var polyline = new AMap.Polyline({
+            path: path,
+        })
+        map.add(polyline);
+
+
+    </script>
+    <!-- <script src="js/flexible.js" /script></script> -->
+</body>
+
+</html>
