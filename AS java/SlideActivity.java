@@ -13,6 +13,8 @@ public class SlideActivity extends AppCompatActivity {
     //声明控件
     private ImageView mIvHead;
     private SlideMenu slideMenu;
+    private Button mBtn_main_1;
+    private Button mBtn_main_2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +24,34 @@ public class SlideActivity extends AppCompatActivity {
         //找到控件
         mIvHead = findViewById(R.id.iv_head);
         slideMenu = findViewById(R.id.slideMenu);
+        mBtn_main_1 = findViewById(R.id.btn_main_1);
+        mBtn_main_2 = findViewById(R.id.btn_main_2);
 
         //实现侧滑
         mIvHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 slideMenu.switchMenu();
+            }
+        });
+
+        //实现直接跳转
+        mBtn_main_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=null;
+                intent =new Intent(SlideActivity.this,SubmitActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //实现直接跳转
+        mBtn_main_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=null;
+                intent =new Intent(SlideActivity.this,MapActivity.class);
+                startActivity(intent);
             }
         });
 

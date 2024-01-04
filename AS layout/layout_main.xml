@@ -31,31 +31,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
+        android:layout_marginTop="350dp"
         android:orientation="vertical">
         
         <Button
             android:id="@+id/btn_main_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="按钮1"
-            android:layout_marginTop="250dp"
+            android:text="提交数据"
+            android:layout_marginTop="10dp"
             android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/btn_main_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="按钮2"
+            android:text="查看地图"
             android:layout_marginTop="10dp"
             android:textColor="@color/black"/>
 
-        <Button
-            android:id="@+id/btn_main_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="按钮3"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"/>
 
         
     </LinearLayout>
