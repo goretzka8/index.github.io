@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.baidu.location.LocationClient;
 
 public class SlideActivity extends AppCompatActivity {
     //声明控件
@@ -15,6 +18,7 @@ public class SlideActivity extends AppCompatActivity {
     private SlideMenu slideMenu;
     private Button mBtn_main_1;
     private Button mBtn_main_2;
+    private TextView locationInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,7 @@ public class SlideActivity extends AppCompatActivity {
         slideMenu = findViewById(R.id.slideMenu);
         mBtn_main_1 = findViewById(R.id.btn_main_1);
         mBtn_main_2 = findViewById(R.id.btn_main_2);
+        locationInfo = findViewById(R.id.locationInfo);
 
         //实现侧滑
         mIvHead.setOnClickListener(new View.OnClickListener() {
