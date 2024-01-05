@@ -1,15 +1,24 @@
 package com.example.group_work;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.ContentUris;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +36,7 @@ public class SubmitActivity extends AppCompatActivity {
     private ImageView picture;
     private Uri imageUri;
     private RadioGroup mRG1;
+    private Button submit_all;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +46,7 @@ public class SubmitActivity extends AppCompatActivity {
         mRG1 = findViewById(R.id.rg_1);
         Button takephoto = (Button) findViewById(R.id.take_photo);
         picture = (ImageView) findViewById(R.id.picture);
+        submit_all = findViewById(R.id.submit_all);
 
         mRG1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -70,10 +81,19 @@ public class SubmitActivity extends AppCompatActivity {
                 startActivityForResult(intent,TAKE_PHOTO);
             }
         });
+
+        submit_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"提交成功",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-    @SuppressLint("MissingSuperCall")
+
+//    @SuppressLint("MissingSuperCall")
         @Override
         protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
             switch (requestCode){
                 case TAKE_PHOTO:
                     if (requestCode == RESULT_OK){

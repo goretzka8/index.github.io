@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="@drawable/background3"
+    android:background="@drawable/background4"
     tools:context=".SubmitActivity">
 
     <LinearLayout
@@ -132,16 +132,16 @@
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:hint="纬度"
-                android:inputType="textPassword"
                 android:maxLines="1"
                 android:padding="5dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_username"
                 />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="10dp">
             <TextView
@@ -154,20 +154,25 @@
             <Button
                 android:id="@+id/take_photo"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
                 android:text="拍照"/>
 
             <ImageView
                 android:id="@+id/picture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                />
-
-
-
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/submit_all"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:text="提交"/>
+
     </LinearLayout>
 </ScrollView>
