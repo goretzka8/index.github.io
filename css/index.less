@@ -2,7 +2,8 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box
+    box-sizing: border-box;
+    text-decoration: none;
 }
 
 li {
@@ -18,6 +19,11 @@ li {
 body {
     background: url(../images/map_bg.png) no-repeat top center;
     line-height: 1.15;
+}
+
+a:hover {
+    display: inline-block;
+    text-decoration: none;
 }
 
 header {
@@ -45,48 +51,162 @@ header {
         font-size: 0.25rem;
     }
 
-    .gaodemap {
-        position: absolute;
-        right: 6rem;
-        top: 0;
-        line-height: 0.9375rem;
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 0.25rem;
-        font-weight: 1000;
-        font-family: "electronicFont";
+    .nav {
+        width: 50%;
+    }
 
-        a {
-            text-decoration: underline
+    .nav>ul>li {
+        display: inline-block;
+        width: 100px;
+        text-align: center;
+        left: 0.5rem;
+        height: 50px;
+        position: relative;
+        line-height: 50px;
+        margin-top: 15px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        padding: 0 0.3rem 0;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            width: 20px;
+            height: 10px;
+            border-top: 3px solid #02a6b5;
+            border-left: 3px solid #02a6b5;
         }
 
-        a:hover {
-            text-decoration: none
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: -8px;
-            font-weight: 800;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            border: 2px solid transparent;
-            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-            background-color: transparent;
-            background-image: none;
-            color: rgba(255, 255, 255, 0.7);
-            border-color: rgba(255, 255, 255, 0.7);
-            padding: .1rem .2rem;
-            line-height: 1.5;
-            border-radius: 1rem;
-
-            cursor: pointer;
+        &::after {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            content: "";
+            width: 20px;
+            height: 10px;
+            border-bottom: 3px solid #02a6b5;
+            border-right: 3px solid #02a6b5;
         }
     }
+
+    .nav>ul>li:hover {
+        box-shadow: -10px 0px 15px #034c6a inset,
+            0px -10px 15px #034c6a inset,
+            10px 0px 15px #034c6a inset,
+            0px 10px 15px #034c6a inset;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .nav>ul>li>a {
+        color: #ffffff;
+        font-size: 14px;
+    }
+
+    .nav>ul>li:active {
+        border-bottom: 4px solid #4b8df8;
+        box-shadow: -10px 0px 15px #034c6a inset,
+            0px -10px 15px #034c6a inset,
+            10px 0px 15px #034c6a inset,
+            0px 10px 15px #034c6a inset;
+        box-sizing: border-box;
+    }
+
+
+
+
+    // .gaodemap {
+    //     position: absolute;
+    //     left: 5.1rem;
+    //     top: 0.2rem;
+    //     line-height: 0.5rem;
+    //     color: rgba(255, 255, 255, 0.7);
+    //     font-size: 0.25rem;
+    //     font-weight: 1000;
+    //     font-family: "electronicFont";
+    //     background-color: transparent;
+    //     border-radius: 50%;
+
+    //     a {
+    //         display: inline-block;
+    //         text-decoration: underline;
+    //         color: #4c4c4c;
+    //         padding: 5px
+    //     }
+
+    //     a:hover {
+    //         background-color: #2f88e1;
+    //         border-radius: 15%;
+    //     }
+
+    //     .btn {
+    //         display: inline-block;
+    //         margin-top: -8px;
+    //         font-weight: 800;
+    //         text-align: center;
+    //         white-space: nowrap;
+    //         vertical-align: middle;
+    //         -webkit-user-select: none;
+    //         -moz-user-select: none;
+    //         -ms-user-select: none;
+    //         user-select: none;
+    //         border: 2px solid transparent;
+    //         transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    //         background-color: transparent;
+    //         background-image: none;
+    //         color: rgba(255, 255, 255, 0.7);
+    //         border-color: rgba(255, 255, 255, 0.7);
+    //         padding: .1rem .2rem;
+    //         line-height: 1.5;
+    //         border-radius: 1rem;
+    //         cursor: pointer;
+    //     }
+    // }
+
+    // .image {
+    //     position: absolute;
+    //     left: 6rem;
+    //     top: 0;
+    //     line-height: 0.9375rem;
+    //     color: rgba(255, 255, 255, 0.7);
+    //     font-size: 0.25rem;
+    //     font-weight: 1000;
+    //     font-family: "electronicFont";
+
+    //     a {
+    //         text-decoration: underline
+    //     }
+
+    //     a:hover {
+    //         text-decoration: none
+    //     }
+
+    //     .btn {
+    //         display: inline-block;
+    //         margin-top: -8px;
+    //         font-weight: 800;
+    //         text-align: center;
+    //         white-space: nowrap;
+    //         vertical-align: middle;
+    //         -webkit-user-select: none;
+    //         -moz-user-select: none;
+    //         -ms-user-select: none;
+    //         user-select: none;
+    //         border: 2px solid transparent;
+    //         transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    //         background-color: transparent;
+    //         background-image: none;
+    //         color: rgba(255, 255, 255, 0.7);
+    //         border-color: rgba(255, 255, 255, 0.7);
+    //         padding: .1rem .2rem;
+    //         line-height: 1.5;
+    //         border-radius: 1rem;
+
+    //         cursor: pointer;
+    //     }
+    // }
 }
 
 // 页面主体
@@ -210,7 +330,7 @@ header {
                 border-right: 2px solid #02a6b5;
             }
 
-            ur {
+            ul {
                 display: flex;
 
                 li {
@@ -237,7 +357,7 @@ header {
     }
 
     .no-bd {
-        ur {
+        ul {
             display: flex;
 
             li {
@@ -315,5 +435,17 @@ header {
                 transform: translate(-50%, -50%) rotate(-360deg);
             }
         }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    html {
+        font-size: 42px !important;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    html {
+        font-size: 80px !important;
     }
 }
