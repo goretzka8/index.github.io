@@ -31,8 +31,7 @@
         android:id="@+id/locationInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="wait for map"
+        android:layout_marginLeft="25dp"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:layout_marginTop="100dp"
@@ -43,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="200dp"
         android:orientation="vertical">
         
         <Button
