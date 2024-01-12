@@ -7,7 +7,13 @@
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".MapActivity">
-    
+
+    <TextView
+        android:id="@+id/conn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="网络未连接" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,13 +30,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="普通地图"
-                android:textSize="15dp"/>
+                android:textSize="15sp"/>
             <RadioButton
                 android:id="@+id/id_btn_satellite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="卫星地图"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_marginLeft="5dp"/>
         </RadioGroup>
         <CheckBox
@@ -49,10 +55,10 @@
             android:layout_marginLeft="10dp"/>
     </LinearLayout>
     
-        <com.baidu.mapapi.map.MapView
-            android:id="@+id/bmapView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true" />
-
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        />
 </LinearLayout>

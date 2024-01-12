@@ -7,11 +7,16 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDAbstractLocationListener;
@@ -20,17 +25,26 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
+import com.mysql.jdbc.Statement;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class MapActivity extends AppCompatActivity {
+    public static int conn_on = 0;//用于判断连接是否成功
     private MapView mMapView=null;
     private RadioGroup mapType;
     private RadioButton normalBtn;
@@ -45,6 +59,7 @@ public class MapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_map);
 
@@ -54,6 +69,7 @@ public class MapActivity extends AppCompatActivity {
         sitelliteBtn = findViewById(R.id.id_btn_satellite);
         trafficEnable = findViewById(R.id.id_cb_trafficEnable);
         heatMapEnable = findViewById(R.id.id_cb_heatMapEnable);
+        initEvent();
         mBaiduMap = mMapView.getMap();
         mBaiduMap.setMyLocationEnabled(true);
 
@@ -64,6 +80,42 @@ public class MapActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         mLocationClient.registerLocationListener(new MyLocationListener());
+
+        final TextView conn = (TextView) findViewById(R.id.conn);//取得网络提示框的对象
+        conn.setBackgroundColor(Color.RED);//默认设成红色
+
+        final Handler handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message message) {
+                switch (conn_on)//根据返回值判断网络连接是否成功
+                {
+                    case 1:
+                        conn.setText("网络连接成功");
+                        conn.setBackgroundColor(Color.GREEN);
+                        break;
+                    case 2:
+                        conn.setText("网络连接失败");
+                        break;
+                }
+                return false;
+            }
+        });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message msg = new Message();
+                try {
+                    connect.getConnection2("group");//执行连接测试
+                    if(conn_on == 1){
+                        Connection conn_map = connect.getConnection2("group");
+                        queryDatabaseAndAddMarkers(conn_map);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                handler.sendMessage(msg);//跳转到handler1
+            }
+        }).start();
 
         List<String> permissionList = new ArrayList<String>();
         if (ContextCompat.checkSelfPermission(MapActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ){
@@ -149,6 +201,7 @@ public class MapActivity extends AppCompatActivity {
         locationBuilder.latitude(bdLocation.getLatitude());
         MyLocationData locationData = locationBuilder.build();
         mBaiduMap.setMyLocationData(locationData);
+
     }
 
 
@@ -235,5 +288,57 @@ public class MapActivity extends AppCompatActivity {
 //mLocationClient为第二步初始化过的LocationClient对象
 //需将配置好的LocationClientOption对象，通过setLocOption方法传递给LocationClient对象使用
 //更多LocationClientOption的配置，请参照类参考中LocationClientOption类的详细说明
+    }
+
+    private void queryDatabaseAndAddMarkers(Connection conn) {
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // 执行SQL查询语句
+            stmt = (Statement) conn.createStatement();
+            String sql = "SELECT lat, lng FROM JW";
+            rs = stmt.executeQuery(sql);
+
+            // 创建地图标记点
+            while (rs.next()) {
+                double latitude = rs.getDouble("lat");
+                double longitude = rs.getDouble("lng");
+
+                // 在地图上添加标记点
+                LatLng latLng = new LatLng(latitude, longitude);
+                MarkerOptions markerOptions = new MarkerOptions().position(latLng);
+                BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.mark);
+
+                int width = bitmap.getBitmap().getWidth();
+                int height = bitmap.getBitmap().getHeight();
+
+                float scale = 0.05f;//设置缩放比例
+                int targetWidth = (int)(width*scale);
+                int targetHeight = (int)(height*scale);
+
+                //创建缩小尺寸的 Bitmap 对象
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap.getBitmap(),targetWidth,targetHeight,false);
+                BitmapDescriptor scaledBitmapDescriptor = BitmapDescriptorFactory.fromBitmap(scaledBitmap);
+
+                MarkerOptions option = new MarkerOptions();
+                option.position(latLng).icon(scaledBitmapDescriptor);
+                mBaiduMap.addOverlay(option);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // 关闭结果集和语句对象（不关闭连接对象）
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

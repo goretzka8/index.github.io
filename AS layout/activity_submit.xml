@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="@drawable/background4"
+    android:background="@drawable/background5"
     tools:context=".SubmitActivity">
 
     <LinearLayout
@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1.请选择对应的无人机型号："
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:layout_marginTop="0dp"
                 android:textColor="@color/black"
                 />
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="40dp"
                     android:padding="0dp">
                     <ImageView
                         android:layout_width="60dp"
@@ -99,37 +99,6 @@
                         android:scaleType="centerCrop"
                         android:layout_marginTop="5dp"/>
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="小红 女 \n 20岁"
-                        android:textSize="20dp"
-                        android:textColor="@color/black"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="大白 男 \n 22岁"
-                        android:textSize="20dp"
-                        android:textColor="@color/black"
-                        android:layout_marginTop="5dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="小黑 男 \n 21岁"
-                        android:textSize="20dp"
-                        android:textColor="@color/black"
-                        android:layout_marginTop="5dp"/>
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -142,8 +111,89 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2.请输入对应无人机的经纬度："
-                android:textSize="20dp"
+                android:text="2.请输入用户名："
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/submit_et_4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="用户名"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:background="@drawable/bg_username"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3.请输入用户性别："
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/submit_et_5"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="性别"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:background="@drawable/bg_username"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.请输入用户年龄："
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/submit_et_6"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:hint="年龄"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:background="@drawable/bg_username"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5.请输入对应无人机的经纬度："
+                android:textSize="20sp"
                 android:textColor="@color/black"/>
 
             <EditText
@@ -171,6 +221,52 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_username"
                 />
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/under_line"
+                android:layout_marginTop="5dp"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="地址："
+                    android:textColor="@color/black"/>
+
+                <EditText
+                    android:id="@+id/et_Address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+                <Button
+                    android:id="@+id/btn_L2S"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="坐标 -> 地址"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    />
+                <Button
+                    android:id="@+id/btn_S2L"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="地址 -> 坐标"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="25dp"
+                    />
+        </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -182,8 +278,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3.请输入对应无人机的高度："
-                android:textSize="20dp"
+                android:text="6.请输入对应无人机的高度："
+                android:textSize="20sp"
                 android:textColor="@color/black"/>
 
             <EditText
@@ -203,37 +299,63 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btn_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始传输"
+                android:textColor="@color/black"
+                android:layout_marginLeft="60dp"
+                />
+
+            <Button
+                android:id="@+id/btn_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="停止传输"
+                android:textColor="@color/black"
+                android:layout_marginLeft="45dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="10dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4.提交图片："
-                android:textSize="20dp"
-                android:textColor="@color/black"/>
+                android:text="7.提交图片："
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <Button
-                android:id="@+id/take_photo"
-                android:layout_width="200dp"
+                android:id="@+id/btn_takephoto"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:layout_gravity="center"
                 android:text="拍照"/>
 
-<!--            <Button-->
-<!--                android:id="@+id/chose_photo"-->
-<!--                android:layout_width="200dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:text="从相册中选取"/>-->
-
             <ImageView
-                android:id="@+id/picture"
+                android:id="@+id/img_photo"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_height="200dp"
+                />
+
+            <!--            <Button-->
+            <!--                android:id="@+id/chose_photo"-->
+            <!--                android:layout_width="200dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:text="从相册中选取"/>-->
+
         </LinearLayout>
 
         <Button
@@ -243,6 +365,5 @@
             android:textColor="@color/black"
             android:layout_gravity="center"
             android:text="提交"/>
-
     </LinearLayout>
 </ScrollView>
