@@ -91,7 +91,8 @@ public class connect {
         return a;
         //把查询结果输出来
     }
-    public static int insertIntoData2(final String name,final String sex,final String age,final String lat, final String lng,final String height,final int device,final String Address) throws SQLException {//增加数据
+    public static int insertIntoData2(final String name,final String sex,final String age,final String lat, final String lng,final String height,final int device,final String Address
+                                      ) throws SQLException {//增加数据
         Connection  conn = null;
         conn = getConnection("group");
         //使用DriverManager获取数据库连接
@@ -103,13 +104,14 @@ public class connect {
     }
 
 
-    public static int insertIntoData3(final String name,final String sex,final String age,final String lat, final String lng,final String height,final int device,final String Address) throws SQLException {//增加数据
+    public static int insertIntoData3(final String name,final String sex,final String age,final String lat, final String lng,final String height,final int device,final String Address,
+                                      final String battery_level) throws SQLException {//增加数据
         Connection  conn = null;
         conn = getConnection("group");
         //使用DriverManager获取数据库连接
         Statement stmt = conn.createStatement();
         //使用Connection来创建一个Statment对象
-        String sql = "insert INTO JW (name,sex,age,lat,lng,height,device,Address)VALUES('"+name+"','"+sex+"','"+age+"','"+lat+"','"+lng+"','"+height+"','"+device+"','"+Address+"')";//把用户名和密码插入到数据库中
+        String sql = "insert INTO JW (name,sex,age,lat,lng,height,device,Address,battery_level)VALUES('"+name+"','"+sex+"','"+age+"','"+lat+"','"+lng+"','"+height+"','"+device+"','"+Address+"','"+battery_level+"')";//把用户名和密码插入到数据库中
         return stmt.executeUpdate(sql);
         //执行DML语句，返回受影响的记录条数
     }

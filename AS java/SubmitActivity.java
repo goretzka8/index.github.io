@@ -84,6 +84,7 @@ public class SubmitActivity extends AppCompatActivity {
     private Double my_lat;
     private Double my_lng;
     private String file_path;
+    private EditText battery_level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,8 @@ public class SubmitActivity extends AppCompatActivity {
 
         mbtn_start = findViewById(R.id.btn_start);
         mbtn_stop = findViewById(R.id.btn_stop);
+
+        battery_level = findViewById(R.id.battery_level);
 
         LocationClient.setAgreePrivacy(true);
         try {
@@ -214,6 +217,7 @@ public class SubmitActivity extends AppCompatActivity {
         final EditText sex= (EditText) findViewById(R.id.submit_et_5);
         final EditText age = (EditText) findViewById(R.id.submit_et_6);
         final EditText etAdress = (EditText) findViewById(R.id.et_Address);
+        final EditText battery_level = (EditText) findViewById(R.id.battery_level);
 
         mRG1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -278,7 +282,8 @@ public class SubmitActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            connect.insertIntoData3(name.getText().toString(),sex.getText().toString(),age.getText().toString(),lat.getText().toString(), lng.getText().toString(),height.getText().toString(),myVariable,etAdress.getText().toString());//调用插入数据库语句
+                            connect.insertIntoData3(name.getText().toString(),sex.getText().toString(),age.getText().toString(),lat.getText().toString(), lng.getText().toString(),height.getText().toString(),myVariable,etAdress.getText().toString(),
+                                    battery_level.getText().toString());//调用插入数据库语句
                             connect.insertImage(file_path);
                         } catch (SQLException e) {
                             e.printStackTrace();
