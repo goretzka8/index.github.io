@@ -1,0 +1,42 @@
+{
+    "id1-10": {
+        "height1": 33,
+        "height2": 34,
+        "height3": 35,
+        "height4": 36,
+        "height5": 37,
+        "height6": 38
+    },
+    "id11-20": {
+        "height1": 43,
+        "height2": 34,
+        "height3": 35,
+        "height4": 36,
+        "height5": 37,
+        "height6": 38
+    },
+    "id21-30": {
+        "height1": 53,
+        "height2": 34,
+        "height3": 35,
+        "height4": 36,
+        "height5": 37,
+        "height6": 38
+    },
+    "id31-40": {
+        "height1": 63,
+        "height2": 34,
+        "height3": 35,
+        "height4": 36,
+        "height5": 37,
+        "height6": 38
+    },
+    "id41-50": {
+        "height1": 73,
+        "height2": 34,
+        "height3": 35,
+        "height4": 36,
+        "height5": 37,
+        "height6": 38
+    }
+}

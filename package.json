@@ -1,0 +1,26 @@
+{
+  "name": "neuer666",
+  "version": "20.10.0",
+  "description": "ne",
+  "main": "hello world",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "D:\\html\\data"
+  },
+  "keywords": [
+    "LIUyue(020919)"
+  ],
+  "author": "LYC",
+  "license": "ISC",
+  "dependencies": {
+    "coordtransform": "^2.1.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1"
+  }
+}
