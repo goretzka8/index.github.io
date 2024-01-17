@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".MapActivity">
+
+    <TextView
+        android:id="@+id/conn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="网络未连接" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <RadioGroup
+            android:id="@+id/id_rp_mapType"
+            android:orientation="horizontal"
+            android:checkedButton="@id/id_btn_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/id_btn_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="普通地图"
+                android:textSize="15sp"/>
+            <RadioButton
+                android:id="@+id/id_btn_satellite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="卫星地图"
+                android:textSize="15sp"
+                android:layout_marginLeft="5dp"/>
+        </RadioGroup>
+        <CheckBox
+            android:text="路况图"
+            android:checked="false"
+            android:id="@+id/id_cb_trafficEnable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+        <CheckBox
+            android:text="热力图"
+            android:checked="false"
+            android:id="@+id/id_cb_heatMapEnable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+    
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        />
+</LinearLayout>
