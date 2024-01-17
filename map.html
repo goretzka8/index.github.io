@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <link rel="stylesheet" href="css/map.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/index1.js"></script>
     <title>地图显示</title> -->
     <style>
         html,
@@ -17,24 +19,56 @@
             padding: 0.125rem 0.125rem 0;
         }
     </style>
+<style>
+   #searchContainer {
+            position: absolute;
+            top: 1.5rem;
+            left: .5rem;
+            z-index: 1000;
+            background-color: #1BC7ED;
+            /* 橙色背景 */
+            padding: .125rem;
+            border-radius: .0625rem;
+            box-shadow: 0 0 .125rem rgba(0, 0, 0, 0.1);
+        }
+
+        #searchInput {
+            width: 2.5rem;
+            padding: .0625rem;
+            margin-right: .0625rem;
+            border: 1px solid #fff;
+            border-radius: .0375rem;
+        }
+
+        #searchBtn {
+            padding: .0625rem .125rem;
+            background-color: #106FDB;
+            color: white;
+            border: none;
+            border-radius: .0375rem;
+            cursor: pointer;
+        }
+       
+    }
+</style>
 </head>
 
 <body>
 
-    <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false"
-        onbeforecopy="return false" onmouseup=document.selection.empty() oncopy=document.selection.empty()
-        onselect=document.selection.empty()>
-    </body>
+    <!-- <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false"-->
+    <!--    onbeforecopy="return false" onmouseup=document.selection.empty() oncopy=document.selection.empty()-->
+    <!--    onselect=document.selection.empty()>-->
+    <!--</body> -->
     <header>
-        <h1>无人机检测平台</h1>
+        <h1>无人机分布</h1>
         <div class="showtime"></div>
         <div class="index">
-            <a href="index.html">
+            <a href="http://115.29.205.84:8888/page1">
                 <input type="button" class="btn" value="数据显示" />
             </a>
         </div>
         <div class="image">
-            <a href="image.html">
+            <a href="http://115.29.205.84:8888/page3">
                 <input type="button" class="btn" value="图像显示" />
             </a>
         </div>
@@ -58,15 +92,31 @@
     </header>
     <div id="container"></div>
     <div class="input-card">
-        <h4>地图自适应</h4>
+        <h4>小工具</h4>
         <input id="setFitView" type="button" class="btn" value="地图自适应显示" />
+        <input id="measureDistance" type="button" class="btn" value="测量距离" />
+        <input id="removeMarker" type="button" class="btn" value="删除标记" />
+         <input id="droneposition" type="button" class="btn" value="无人机位置检测" />
+         <input id="line" type="button" class="btn" value="飞行轨迹绘制" />
     </div>
     <div class="info">
-        <div id="centerCoord"></div>
-        <div id="tips"></div>
+        <img src="../images/gaode.png" alt="Info Image" class="info-image">
+        <div id="centerCoord" class="coord1"></div>
+        <div id="tips" class="coord2"></div>
+        <div  class="coord5">----------------------------------</div>
+        <div id="tip1" class="coord4">无人机飞行日志</div>
+        <div id="tip" class="coord3">xfgh1无人机状态</div>
+        <div id="searchContainer">
+        <input type="text" id="searchInput" placeholder="输入无人机用户名">
+        <button id="searchBtn">搜索</button>
+        </div>
+    </div>
+
+
         <!-- <div id="tip" class="info">地图上右击鼠标，弹出自定义样式的右键菜单</div> -->
         <!-- 加载地图JSAPI脚本 -->
-        <script src="https://webapi.amap.com/maps?v=1.4.15&key=91b56baae0463cb07b7b46961d0a7ebe"></script>
+        <script src="https://webapi.amap.com/maps?v=1.4.15&key=91b56baae0463cb07b7b46961d0a7ebe&plugin=AMap.Autocomplete"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
             var map = new AMap.Map('container', {
                 resizeEnable: true, //是否监控地图容器尺寸变化
@@ -77,8 +127,48 @@
                 zIndex: 10
             });
             map.add(trafficLayer);//添加图层到地图
+            
+  var autoOptions = {
+        input: 'searchInput',
+    };
+    var autocomplete = new AMap.Autocomplete(autoOptions);
 
-            // 同时引入工具条插件，比例尺插件和鹰眼插件
+    var searchInput = document.getElementById('searchInput');
+    var searchResultPanel = document.getElementById('searchResultPanel');
+
+    searchInput.addEventListener('input', function () {
+        var keyword = searchInput.value.trim();
+        if (keyword !== '') {
+            // 使用Autocomplete插件进行关键字搜索
+            autocomplete.search(keyword, function (status, result) {
+                if (status === 'complete') {
+                    // 清空之前的搜索结果
+                    searchResultPanel.innerHTML = '';
+
+                    // 处理搜索结果
+                    var pois = result.tips;
+                    pois.forEach(function (poi) {
+                        var item = document.createElement('div');
+                        item.className = 'search-result-item';
+                        item.innerText = poi.name;
+
+                        // 监听下拉列表项的点击事件
+                        item.addEventListener('click', function () {
+                            // 将地图中心移动到选中的位置
+                            map.setCenter(poi.location);
+                            // 清空搜索结果面板
+                            searchResultPanel.innerHTML = '';
+                        });
+
+                        searchResultPanel.appendChild(item);
+                    });
+                }
+            });
+        } else {
+            // 清空搜索结果面板
+            searchResultPanel.innerHTML = '';
+        }
+    });   // 同时引入工具条插件，比例尺插件和鹰眼插件
             AMap.plugin([
                 'AMap.ToolBar',
                 'AMap.Scale',
@@ -100,131 +190,135 @@
 
                 // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
                 map.addControl(new AMap.Geolocation());
+
             });
 
-            // //创建右键菜单
-            // var contextMenu = new AMap.ContextMenu();
+            // 测距按钮点击事件
+            document.getElementById('measureDistance').onclick = function () {
+                // 清空已保存的点
+                points = [];
 
-            // //右键放大
-            // contextMenu.addItem("放大一级", function () {
-            //     map.zoomIn();
-            // }, 0);
+                // 设置测量状态为启动
+                measuring = true;
+                // 使用 SweetAlert 提示用户已经进入测量状态，并设置 customClass
+                Swal.fire({
+                    title: '测量距离',
+                    text: '点击地图选择两点进行测量',
+                    position: 'top-end',
+                    customClass: {
+                        popup: 'small-popup' // 添加自定义类名
+                    }
+                });
+            };
 
-            // //右键缩小
-            // contextMenu.addItem("缩小一级", function () {
-            //     map.zoomOut();
-            // }, 1);
+            // 添加点击事件监听
+            map.on('click', function (e) {
+                // 判断是否处于测量状态
+                if (measuring) {
+                    points.push(e.lnglat); // 将点击位置的经纬度保存到数组中
 
-            // //右键显示全国范围
-            // contextMenu.addItem("缩放至全国范围", function (e) {
-            //     map.setZoomAndCenter(4, [108.946609, 34.262324]);
-            // }, 2);
+                    if (points.length === 2) {
+                        // 计算两点之间的距离
+                        var distance = AMap.GeometryUtil.distance(points[0], points[1]).toFixed(2);
 
-            // //右键添加Marker标记
-            // contextMenu.addItem("添加标记", function (e) {
-            //     var marker = new AMap.Marker({
-            //         map: map,
-            //         position: contextMenuPositon //基点位置
-            //     });
-            // }, 3);
+                        // 使用 SweetAlert 弹窗显示距离结果，并设置 customClass
+                        Swal.fire({
+                            title: '测量距离',
+                            html: distance + ' 米',
+                            position: 'top-end',
+                           customClass: {
+                popup: 'small-popup',
+                title: 'small-font',
+                htmlContainer: 'html-content',
+                // 添加自定义类名
+            },
+            confirmButtonText: '知道了',
+                        });
 
-            // //地图绑定鼠标右击事件——弹出右键菜单
-            // map.on('rightclick', function (e) {
-            //     contextMenu.open(map, e.lnglat);
-            //     contextMenuPositon = e.lnglat;
-            // });
+                        measuring = false;
+                        // 清空已保存的点，准备下一次测量
+                        points = [];
+                    }
+                }
+            });
+          map.on('rightclick', function (e) {
+    // 创建新的地图标记
+    var newMarker = new AMap.Marker({
+        map: map,
+        position: e.lnglat,
+        offset: new AMap.Pixel(-13, -30),
+    });
+    markers.push(newMarker);
+    var latitude = e.lnglat.getLat();
+    var longitude = e.lnglat.getLng();
 
-            // contextMenu.open(map, lnglat);
+    // 创建信息窗体，模板与其他标记一样
+    var infoWindow = new AMap.InfoWindow({
+        content: '<div class="custom-info-window">' +
+            '<h3><img src="../images/user.png" alt="Info Image" class="info-image2" style="width:0.4rem;height:0.4rem;vertical-align: middle;margin-right: 0.1rem;">新增标记</h3>' +
+            '<p><img src="../images/nav_9.png" alt="Info Image" class="info-image2" style="width:0.3rem;height:0.3rem;vertical-align: middle;margin-right: 0.1rem;">经度：' + longitude + '<br><img src="../images/nav_9.png" alt="Info Image" class="info-image2" style="width:0.3rem;height:0.3rem;vertical-align: middle;margin-right: 0.1rem;">纬度：' + latitude + '</p>' +
+            '</div>',
+        offset: new AMap.Pixel(0, -30)
+    });
 
+    newMarker.on('mouseover', function () {
+        // 在标记位置打开信息窗体
+        infoWindow.open(map, newMarker.getPosition());
+    });
 
-            // var contextMenu = new AMap.ContextMenu({
-            //     isCustom: true,
-            //     content: content.join('')
-            // });
-
-            // map.on('rightclick', function (e) {
-            //     contextMenu.open(map, e.lnglat);
-            // });
-
-
-            // //添加marker1标记
-            // var marker1 = new AMap.Marker({
-            //     position: [116.397428, 39.90923], //位置
-            //     offset: new AMap.Pixel(-13, -30),//偏移
-            // });
-
-            // //监听标点点击事件（显示窗体信息）
-            // marker1.on('click', e => {
-            //     //创建窗体实例
-            //     let infoWindow = new AMap.InfoWindow({
-            //         content: '经度:116<br/>纬度:39<br/>高度:50',//窗体内容,支持插入dom.innerHTML 
-            //         anchor: 'top-right'//锚点，窗体相对鼠标点击位置
-            //     });
-            //     //显示窗体
-            //     //map:地图实例，[lng,lat]:窗体在地图中位置
-            //     infoWindow.open(map, [e.lnglat.lng, e.lnglat.lat])
-            // })
-            // //标点添加到地图上
-            // marker1.setMap(map);
-            // infoWindow.close();//关闭信息窗口
-
-            // //marker2
-            // var marker2 = new AMap.Marker({
-            //     position: [114, 30], //位置
-            //     offset: new AMap.Pixel(-13, -30),//偏移
-            // });
-
-            // //监听标点点击事件（显示窗体信息）
-            // marker2.on('click', e => {
-            //     //创建窗体实例
-            //     let infoWindow = new AMap.InfoWindow({
-            //         content: '经度:114<br/>纬度:30<br/>高度:50',//窗体内容,支持插入dom.innerHTML 
-            //         anchor: 'top-right'//锚点，窗体相对鼠标点击位置
-            //     });
-            //     //显示窗体
-            //     //map:地图实例，[lng,lat]:窗体在地图中位置
-            //     infoWindow.open(map, [e.lnglat.lng, e.lnglat.lat])
-            // })
-            // //标点添加到地图上
-            // marker2.setMap(map);
-            // infoWindow.close();//关闭信息窗口
+    newMarker.on('mouseout', function () {
+        // 在标记位置关闭信息窗体
+        infoWindow.close(map, newMarker.getPosition());
+    });
+});
+            var removeMarkerBtn = document.getElementById('removeMarker');
+            removeMarkerBtn.addEventListener('click', function () {
+                // 检查数组中是否有标记
+                if (markers.length > 0) {
+                    // 从地图中移除最后一个标记
+                    map.remove(markers.pop());
+                }
+            });
 
             map.clearMap();  // 清除地图覆盖物
 
             var markers = [{
                 position: [114.205467, 30.907761],
                 title: '设备信息',
+                height:1,
+                number:1,
+                battery:1
             },
             {
                 position: [114.368904, 30.913423],
                 title: '设备信息',
+                height:1,
+                number:1,
+                battery:1
             },
             {
                 position: [114.305467, 31.807761],
                 title: '设备信息',
+                height:1,
+                number:1,
+                battery:1
             },
             {
                 position: [114.345467, 31.77761],
                 title: '设备信息',
+                height:1,
+                number:1,
+                battery:1
             },
             {
                 position: [114.505467, 30.707761],
                 title: '设备信息',
-            },
-            {
-                position: [115.368904, 30.313423],
-                title: '设备信息',
-            },
-            {
-                position: [114.395467, 31.007761],
-                title: '设备信息',
-            },
-            {
-                position: [113.345467, 31.57761],
-                title: '设备信息',
+                height:1,
+                number:1,
+                battery:1
             }
             ];
-
+var process=[];
             //遍历markers
             markers.forEach(function (marker) {
                 // 创建新的地图标记
@@ -250,6 +344,7 @@
                     return function () {
                         // 在标记位置打开信息窗体
                         infoWindow.open(map, newMarker.getPosition());
+
                     };
                 })(infoWindow, marker));
 
@@ -271,11 +366,19 @@
             AMap.event.addDomListener(document.getElementById('setFitView'), 'click', function () {
                 var newCenter = map.setFitView();
                 document.getElementById('centerCoord').innerHTML = '当前中心点坐标：' + newCenter.getCenter();
-                document.getElementById('tips').innerHTML = '通过setFitView,地图自适应显示到合适的范围内,点标记已全部显示在视野中！';
+                document.getElementById('tips').innerHTML = '地图已自适应显示到合适的范围内';
             });
 
         </script>
-
+        <script src="https://api.oioweb.cn/api/ip/geocoder"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.5/proj4.js"></script>
+        <script src="js/jquery.js" ></script>
+        <script src="js/correct.js" ></script>
+        <script src="js/index.js" ></script>
+        <script src="js/flexible.js" ></script>
+        <script src="js/guiji.js" ></script>
+        <script src="js/test.js" ></script>
+         <script src="js/processdata.js" ></script>
 </body>
 
 </html>

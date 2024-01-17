@@ -6,23 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>图像展示</title>
     <link rel="stylesheet" href="css/image.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script src="js/jquery.js" /script></script>
+
 </head>
 
 <body>
-    //禁用右键
 
-    <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false"
+     <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false"
         onbeforecopy="return false" onmouseup=document.selection.empty() oncopy=document.selection.empty()
         onselect=document.selection.empty()>
-    </body>
+    </body> -->
     <!-- 头部 -->
     <header>
-        <h1>设备图像展示</h1>
+        <h1><img src="../images/nav_5R.png" alt="Info Image" class="info-image1">设备图像展示</h1>
         <div class="showtime"></div>
         <div class="nav">
             <ul>
-                <li><a href="map.html">地图显示</a></li>
-                <li></i><a href="index.html">数据显示</a></li>
+                <li><img src="../images/nav_3.png" alt="Info Image" class="info-image"><a href="http://115.29.205.84:8888/page2">地图显示</a>
+                </li>
+                <li><img src="../images/nav_2.png" alt="Info Image" class="info-image"></i><a
+                        href="http://115.29.205.84:8888/page1">数据显示</a></li>
+                        <li></i><img src="../images/nav_13.png" alt="Info Image" class="info-image"><a
+                        href="javascript:void(0);" id="abc">关闭显示</a></li>
             </ul>
         </div>
 
@@ -48,59 +56,68 @@
     <section class="mainbox">
         <div class="column">
             <div class="panel line">
-                <h2>1</h2>
-                <div class="chart"></div>
+                <div class="chart">
+                <div id="imageContainer1"></div>
+                 </div>
                 <div class="panel-footer"></div>
             </div>
             <div class="panel line2">
-                <h2>2</h2>
-                <div class="chart"></div>
+                <div class="chart">
+                <div id="imageContainer2"></div>
+               </div>
                 <div class="panel-footer"></div>
             </div>
             <div class="panel line">
-                <h2>3</h2>
-                <div class="chart"></div>
+                <div class="chart">
+                <div id="imageContainer3"></div>
+                </div>
                 <div class="panel-footer"></div>
             </div>
         </div>
         <div class="column">
             <div class="panel line">
-                <h2>4</h2>
-                <div class="chart"></div>
+                <div class="chart">
+                <div id="imageContainer4"></div>
+                </div>
                 <div class="panel-footer"></div>
             </div>
             <div class="panel line2">
-                <h2>5</h2>
-                <div class="chart"></div>
+                <div class="chart">
+                <div id="imageContainer5"></div>
+                </div>
                 <div class="panel-footer"></div>
             </div>
             <div class="panel line">
-                <h2>6</h2>
-                <div class="chart"></div>
+                <div class="chart">
+                <div id="imageContainer6"></div>
+               </div>
                 <div class="panel-footer"></div>
             </div>
         </div>
         <div class="column">
             <div class="panel bar">
-                <h2>7</h2>
-                <div class="chart"></div>
+                <div class="chart">
+                <div id="imageContainer7"></div>
+                </div>
                 <div class="panel-footer"></div>
             </div>
             <div class="panel line">
-                <h2>8</h2>
-                <div class="chart"></div>
+                <div class="chart">
+                <div id="imageContainer8"></div>
+                </div>
                 <div class="panel-footer"></div>
             </div>
             <div class="panel pie">
-                <h2>9</h2>
-                <div class="chart"></div>
+                <div class="chart">
+                <div id="imageContainer9"></div>
+                </div>
                 <div class="panel-footer"></div>
             </div>
         </div>
 
     </section>
     <script src="js/flexible.js" /script></script>
-
+    <script src="js/photo.js" /script></script>
 </body>
 
 </html>

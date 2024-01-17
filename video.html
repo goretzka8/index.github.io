@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频上传</title>
+</head>
+<body>
+    <form action="/api/upload" method="post" enctype="multipart/form-data">
+        <label for="video">选择视频文件：</label>
+        <input type="file" name="video" id="video" accept="video/*">
+        <br>
+        <button type="submit">上传视频</button>
+    </form>
+</body>
+</html>
